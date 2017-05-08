@@ -28,9 +28,6 @@ class NoteCreateView(ListCreateAPIView):
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
-    # def get_queryset(self):
-    #     return get_object_or_404(Note, owner=self.request.user)
-
 
 class NoteDetailView(RetrieveUpdateDestroyAPIView):
     queryset = Note.objects.all()

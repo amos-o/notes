@@ -18,6 +18,15 @@ class TestNoteApi(APITestCase):
         # login to the api
         self.client.login(username="amos", password="test")
 
+    def test_user_creation(self):
+        response = self.client.post(reverse('register'), {
+            'username': 'Tester',
+            'email': 'tester@andela.com',
+            'password': '12345'
+        })
+
+        self.assertEqual(User.objects.count(), 2)
+
     def test_note_creation(self):
         response = self.client.post(reverse('notes'), {
             'name': 'New Note',
