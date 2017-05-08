@@ -29,7 +29,7 @@ class TestNoteApi(APITestCase):
 
     def test_getting_notes(self):
         response = self.client.get(reverse('notes'), format="json")
-        self.assertEqual(len(response.data), 1)
+        self.assertEqual(len(response.data['results']), 1)
 
     def test_note_update(self):
         response = self.client.put(reverse('detail', kwargs={'pk': 1}), {
