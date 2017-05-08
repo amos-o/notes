@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 
 from rest_framework.serializers import ModelSerializer
 
+from api.models import Note
 
 class NoteSerializer(ModelSerializer):
     class Meta:
