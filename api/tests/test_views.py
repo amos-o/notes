@@ -13,6 +13,7 @@ class TestNoteApi(APITestCase):
 
         # create note
         self.note = Note(name="Test Note 1", content="A bright day", owner=self.user)
+        self.note.save()
 
         # login to the api
         self.client.login(username="amos", password="test")
@@ -24,20 +25,21 @@ class TestNoteApi(APITestCase):
         })
 
         self.assertEqual(Note.objects.count(), 2)
-        self.assertEqual(200, response.status_code)
+        self.assertEqual(201, response.status_code)
 
     def test_getting_notes(self):
         response = self.client.get(reverse('notes'), format="json")
         self.assertEqual(len(response.data), 1)
 
     def test_note_update(self):
-        response = self.client.post('/notes/1', {
-            'name': 'Test Note 1 updated'
+        response = self.client.put(reverse('detail', kwargs={'pk': 1}), {
+            'name': 'Test Note 1 updated',
+            'content': 'Totally new content'
         }, format="json")
 
-        self.assertIn('Test Note 1 updated', response.data)
+        self.assertEqual('Test Note 1 updated', response.data['name'])
 
     def test_note_deletion(self):
-        response = self.client.delete('/notes/1')
+        response = self.client.delete(reverse('detail', kwargs={'pk': 1}))
 
         self.assertEqual(204, response.status_code)

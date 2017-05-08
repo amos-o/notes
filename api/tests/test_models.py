@@ -12,7 +12,6 @@ class TestNoteModel(TestCase):
         self.note = Note(name="Test Note", content="Test Note content", owner=self.user)
         self.note.save()
 
-
     def test_note_creation(self):
         note2 = Note(name="Test Note 2", content="Test Note 2 content", owner=self.user)
         note2.save()

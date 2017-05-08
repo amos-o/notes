@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 
-from rest_framework.generics import ListCreateAPIView, CreateAPIView
+from rest_framework.generics import ListCreateAPIView, CreateAPIView, RetrieveUpdateDestroyAPIView
 
 from api.models import Note
 from api.serializers import UserSerializer, NoteSerializer
@@ -26,5 +26,6 @@ class NoteCreateView(ListCreateAPIView):
         serializer.save(owner=self.request.user)
 
 
-class NoteDetailView():
-    pass
+class NoteDetailView(RetrieveUpdateDestroyAPIView):
+    queryset = Note.objects.all()
+    serializer_class = NoteSerializer

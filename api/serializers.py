@@ -8,6 +8,9 @@ class NoteSerializer(ModelSerializer):
     class Meta:
         model = Note
         fields = ('id', 'name', 'content', 'owner')
+        extra_kwargs = {
+            'owner': {'read_only': True}
+        }
 
 
 class UserSerializer(ModelSerializer):
