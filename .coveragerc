@@ -6,3 +6,5 @@ omit =
     *migrations/*
     *api/admin.py*
     *manage.py*
+    *api/apps.py*
+    *notes/wsgi.py*
